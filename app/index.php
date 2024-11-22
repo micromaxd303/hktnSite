@@ -1,39 +1,78 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Hello there</title>
-        <style>
-            body {
-                font-family: "Arial", sans-serif;
-                font-size: larger;
-            }
+<?
+// Страница регистрации нового пользователя
 
-            .center {
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-                width: 50%;
-            }
-        </style>
-    </head>
-    <body>
-        <img src="https://tech.osteel.me/images/2020/03/04/hello.gif" alt="Hello there" class="center">
-        <?php
-        $connection = new PDO('mysql:host=mysql;dbname=demo;charset=utf8', 'root', 'root');
-        $query      = $connection->query("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'demo'");
-        $tables     = $query->fetchAll(PDO::FETCH_COLUMN);
+// Соединямся с БД
+$connection = new PDO('mysql:host=mysql;dbname=albiDB;charset=utf8', 'root', 'root');
 
-        if (empty($tables)) {
-            echo '<p class="center">There are no tables in database <code>demo</code>.</p>';
-        } else {
-            echo '<p class="center">Database <code>demo</code> contains the following tables:</p>';
-            echo '<ul class="center">';
-            foreach ($tables as $table) {
-                echo "<li>{$table}</li>";
-            }
-            echo '</ul>';
+if(isset($_POST['submit']))
+{
+    $err = [];
+
+    // проверям логин
+    if(!preg_match("/^[a-zA-Z0-9]+$/",$_POST['login']))
+    {
+        $err[] = "Логин может состоять только из букв английского алфавита и цифр";
+    }
+
+    if(strlen($_POST['login']) < 3 or strlen($_POST['login']) > 30)
+    {
+        $err[] = "Логин должен быть не меньше 3-х символов и не больше 30";
+    }
+
+    // проверяем, не сущестует ли пользователя с таким логином
+    $query = $connection->query("SELECT user_id FROM users WHERE phoneOrEmail='".$_POST['login']."'");
+    $tables = $query->fetch(PDO::FETCH_COLUMN);
+    
+    if($tables)
+    {
+        $err[] = "Пользователь с таким логином уже существует в базе данных";
+    }
+
+    // Если нет ошибок, то добавляем в БД нового пользователя
+    if(count($err) == 0)
+    {
+
+        $login = $_POST['login'];
+
+        // Убераем лишние пробелы и делаем двойное хеширование
+        $password = md5(md5(trim($_POST['password'])));
+
+        $connection->query("INSERT INTO users SET phoneOrEmail='".$login."', password='".$password."'");
+        //header("Location: login.php"); exit();
+    }
+    else
+    {
+        print "<b>При регистрации произошли следующие ошибки:</b><br>";
+        foreach($err AS $error)
+        {
+            print $error."<br>";
         }
-        ?>
-    </body>
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Wavy login form</title>
+  <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet">
+  <style type="text/css">
+    <?php
+    include "styles/style.css";
+    ?>
+  </style>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<form class="login" method="POST">
+  <input name="login" type="text" placeholder="Username" required>
+  <input name="password" type="password" placeholder="Password" required>
+  <button name="submit">Login</button>
+</form>
+
+<!-- partial -->
+  
+</body>
 </html>
