@@ -1,0 +1,52 @@
+# Services
+services:
+  # Nginx
+  nginx:
+    container_name: nginx
+    image: nginx:1.27.2
+    ports:
+      - 80:80
+    volumes:
+      - ./app:/var/www/php
+      - ./.docker/nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - php
+
+  # Php
+  php:
+    container_name: backend
+    build: ./.docker/php
+    #image: php:8.3-fpm
+    working_dir: /var/www/php
+    volumes:
+      - ./app:/var/www/php
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:9.1.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: demo
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - ./.docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - mysqldata:/var/lib/mysql
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
+      interval: 5s
+      retries: 10
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.1
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  mysqldata:
