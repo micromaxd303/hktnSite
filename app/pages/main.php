@@ -4,13 +4,17 @@
 
     if(!isset($_SESSION['username'])) {
     header("Location: auth.php");
-
-
-   
 }
+
+    if (isset($_POST['personPage']))
+    {
+        header("Location: personal_page.php");
+    }
+
     $connection = new PDO('mysql:host=mysql;dbname=albiDB;charset=utf8', 'root', 'root');
 
     $query = $connection ->query("SELECT user_name, user_surname, user_email, roles.role_name AS user_role FROM users JOIN roles ON users.user_role = roles.role_id WHERE user_id='".$_SESSION['id']."'");
+    
     $data = $query->fetch(PDO::FETCH_ASSOC);
 ?>
 
@@ -38,7 +42,7 @@
             global $data;     
             echo '<p>', $data['user_role'], ' ', $data['user_name'], ' ', $data['user_surname'], '  ',$data['user_email'], '</p>';
             ?>
-            <button class="profile-button" aria-label="Перейти в личный кабинет"></button>
+            <form method="POST"><button class="profile-button" aria-label="Перейти в личный кабинет" name="personPage"></button></form>
         </div>
     </header>
     <main class="content">
@@ -48,193 +52,85 @@
             <!-- Колонка "Открыт" -->
             <div class="column">
                 <h2>Открыт</h2>
-                <div class="task-card">
-                    <a href="/project1.html" class="task-link">
-                        <img src="/images/project1.png" alt="Проект 1" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Дом на холме</h3>
-                        <p>Проект индивидуального коттеджа.</p>
-                    </div>
-                </div>
-                <div class="task-card">
-                    <a href="/project2.html" class="task-link">
-                        <img src="/images/project2.png" alt="Проект 2" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Апартаменты «Лайт»</h3>
-                        <p>Современный жилой дом.</p>
-                    </div>
-                </div>
-                <div class="task-card">
-                    <a href="/project2.html" class="task-link">
-                        <img src="/images/project2.png" alt="Проект 2" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Апартаменты «Лайт»</h3>
-                        <p>Современный жилой дом.</p>
-                    </div>
-                </div>
-                <div class="task-card">
-                    <a href="/project2.html" class="task-link">
-                        <img src="/images/project2.png" alt="Проект 2" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Апартаменты «Лайт»</h3>
-                        <p>Современный жилой дом.</p>
-                    </div>
-                </div>
-                <div class="task-card">
-                    <a href="/project2.html" class="task-link">
-                        <img src="/images/project2.png" alt="Проект 2" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Апартаменты «Лайт»</h3>
-                        <p>Современный жилой дом.</p>
-                    </div>
-                </div>
-                <div class="task-card">
-                    <a href="/project2.html" class="task-link">
-                        <img src="/images/project2.png" alt="Проект 2" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Апартаменты «Лайт»</h3>
-                        <p>Современный жилой дом.</p>
-                    </div>
-                </div>
-                <div class="task-card">
-                    <a href="/project2.html" class="task-link">
-                        <img src="/images/project2.png" alt="Проект 2" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Апартаменты «Лайт»</h3>
-                        <p>Современный жилой дом.</p>
-                    </div>
-                </div>
+                <?php
+                    global $connection;
+                    $projects = $connection->query("SELECT project_name, prewiew, manager FROM projects WHERE stage=1");
+                    $data = $projects->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($data as $element)
+                    {                       
+                        echo '<div class="task-card">';
+                        echo '<a href="/project1.html" class="task-link">';
+                        echo '<img src="/images/',$element['prewiew'], '" alt="Проект" class="task-image"></a>';
+                        echo '<div class="task-info">';
+                        echo '<h3>', $element['project_name'], '</h3>';
+                        echo '<p> Проект еще не начат</p>';
+                        echo '</div></div>';
+                    }
+                ?>
             </div>
 
             <!-- Колонка "В работе" -->
             <div class="column">
                 <h2>В работе</h2>
-                <div class="task-card">
-                    <a href="/project3.html" class="task-link">
-                        <img src="/images/project3.png" alt="Проект 3" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Солнечная вилла</h3>
-                        <p>Проект загородного дома с бассейном.</p>
-                    </div>
-                </div>
-                <div class="task-card">
-                    <a href="/project4.html" class="task-link">
-                        <img src="/images/project4.png" alt="Проект 4" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Торговый центр</h3>
-                        <p>Коммерческая недвижимость.</p>
-                    </div>
-                </div>
-                <div class="task-card">
-                    <a href="/project2.html" class="task-link">
-                        <img src="/images/project2.png" alt="Проект 2" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Апартаменты «Лайт»</h3>
-                        <p>Современный жилой дом.</p>
-                    </div>
-                </div>
-                <div class="task-card">
-                    <a href="/project2.html" class="task-link">
-                        <img src="/images/project2.png" alt="Проект 2" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Апартаменты «Лайт»</h3>
-                        <p>Современный жилой дом.</p>
-                    </div>
-                </div>
-                <div class="task-card">
-                    <a href="/project2.html" class="task-link">
-                        <img src="/images/project2.png" alt="Проект 2" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Апартаменты «Лайт»</h3>
-                        <p>Современный жилой дом.</p>
-                    </div>
-                </div>
+                <?php
+                    global $connection;
+                    $projects = $connection->query("SELECT project_name, prewiew, manager, startTime, endTime FROM projects WHERE stage=2");
+                    $data = $projects->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($data as $element)
+                    {                       
+                        echo '<div class="task-card">';
+                        echo '<a href="/project1.html" class="task-link">';
+                        echo '<img src="/images/',$element['prewiew'], '" alt="Проект" class="task-image"></a>';
+                        echo '<div class="task-info">';
+                        echo '<h3>', $element['project_name'], '</h3>';
+                        echo '<p>', $element['startTime'], '</p>';
+
+                        echo '</div></div>';
+                    }
+                ?>
             </div>
 
             <!-- Колонка "Закончен" -->
             <div class="column">
                 <h2>Закончен</h2>
-                <div class="task-card">
-                    <a href="/project5.html" class="task-link">
-                        <img src="/images/project5.png" alt="Проект 5" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Эко-дом</h3>
-                        <p>Экологичное строительство.</p>
-                    </div>
-                </div>
-                <div class="task-card">
-                    <a href="/project6.html" class="task-link">
-                        <img src="/images/project6.png" alt="Проект 6" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Клубный дом</h3>
-                        <p>Уютная городская резиденция.</p>
-                    </div>
-                </div>
-                <div class="task-card">
-                    <a href="/project2.html" class="task-link">
-                        <img src="/images/project2.png" alt="Проект 2" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Апартаменты «Лайт»</h3>
-                        <p>Современный жилой дом.</p>
-                    </div>
-                </div>
-                <div class="task-card">
-                    <a href="/project2.html" class="task-link">
-                        <img src="/images/project2.png" alt="Проект 2" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Апартаменты «Лайт»</h3>
-                        <p>Современный жилой дом.</p>
-                    </div>
-                </div>
-                <div class="task-card">
-                    <a href="/project2.html" class="task-link">
-                        <img src="/images/project2.png" alt="Проект 2" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Апартаменты «Лайт»</h3>
-                        <p>Современный жилой дом.</p>
-                    </div>
-                </div>
+                <?php
+                    global $connection;
+                    $projects = $connection->query("SELECT project_name, prewiew, manager, startTime, endTime FROM projects WHERE stage=3");
+                    $data = $projects->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($data as $element)
+                    {                       
+                        echo '<div class="task-card">';
+                        echo '<a href="/project1.html" class="task-link">';
+                        echo '<img src="/images/',$element['prewiew'], '" alt="Проект" class="task-image"></a>';
+                        echo '<div class="task-info">';
+                        echo '<h3>', $element['project_name'], '</h3>';
+                        echo '<p>', $element['startTime'], '--', $element['endTime'], '</p>';
 
+                        echo '</div></div>';
+                    }
+                ?>
             </div>
 
             <!-- Колонка "Сдан" -->
             <div class="column">
                 <h2>Сдан</h2>
-                <div class="task-card">
-                    <a href="/project7.html" class="task-link">
-                        <img src="/images/project7.png" alt="Проект 7" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>Офисное здание</h3>
-                        <p>Многофункциональное бизнес-здание.</p>
-                    </div>
-                </div>
-                <div class="task-card">
-                    <a href="/project8.html" class="task-link">
-                        <img src="/images/project8.png" alt="Проект 8" class="task-image">
-                    </a>
-                    <div class="task-info">
-                        <h3>ТЦ «Гранд Плаза»</h3>
-                        <p>Модернизированный торговый центр.</p>
-                    </div>
-                </div>
+                <?php
+                    global $connection;
+                    $projects = $connection->query("SELECT project_name, prewiew, manager, startTime, endTime FROM projects WHERE stage=4");
+                    $data = $projects->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($data as $element)
+                    {                       
+                        echo '<div class="task-card">';
+                        echo '<a href="/project1.html" class="task-link">';
+                        echo '<img src="/images/',$element['prewiew'], '" alt="Проект" class="task-image"></a>';
+                        echo '<div class="task-info">';
+                        echo '<h3>', $element['project_name'], '</h3>';
+                        echo '<p>', $element['startTime'], '--', $element['endTime'], '</p>';
+                        echo '<p>Оценка: </p>';
+
+                        echo '</div></div>';
+                    }
+                ?>
             </div>
 
         </div>

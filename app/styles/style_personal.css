@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Play', sans-serif;
+    background-image: url(../images/city.jpg);
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(0, 128, 0, 0.8);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+
+.logo-button {
+    width: 100px;
+    height: 50px;
+    background: url('../images/logo.png') no-repeat center center;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: inline-block;
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    overflow: hidden;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-info p {
+    margin: 0;
+    font-size: 14px;
+    text-align: right;
+}
+
+.name-phone {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.name-phone p {
+    margin: 0;
+}
+
+.user-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-button:hover {
+    background-color: lightgray;
+}
+
+/* Profile Page Styles */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.profile-container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 1000px;
+    padding: 20px 30px;
+    margin: 20px auto;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.profile-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.profile-left {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.avatar-container {
+    text-align: center;
+}
+
+.avatar-container img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #ccc;
+    margin-bottom: 10px;
+}
+
+.avatar-container p {
+    font-size: 14px;
+    color: #555;
+}
+
+button {
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.upload-photo {
+    background: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.delete-photo {
+    background: #f44336;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.profile-right {
+    flex: 3;
+    min-width: 300px;
+}
+
+.info-block {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.info-block div {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.info-block div label {
+    font-weight: bold;
+}
+
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+}
+
+.edit-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: #4caf50;
+    color: white;
+}
+
+.admin-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+}
+
+.edit-button:hover, .admin-button:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .header {
+        height: auto;
+        padding: 10px 20px;
+        flex-wrap: wrap;
+    }
+
+    .user-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .name-phone {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .user-name, .user-phone {
+        font-size: 16px;
+    }
+
+    .user-button-container {
+        margin-top: 10px;
+    }
+
+    .main-container {
+
+    }
+
+    .profile-container {
+
+    }
+
+    .profile-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .info-block {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .info-block div {
+
+    }
+
+    .buttons {
+        justify-content: center;
+    }
+}
