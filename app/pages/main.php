@@ -8,12 +8,17 @@
 
     if (isset($_POST['personPage']))
     {
-        header("Location: personal_page.php");
+        header("Location: personal_page.php"); 
+    }
+
+    if (isset($_POST['createProject']))
+    {
+        header("Location: maket_new.php"); 
     }
 
     $connection = new PDO('mysql:host=mysql;dbname=albiDB;charset=utf8', 'root', 'root');
 
-    $query = $connection ->query("SELECT user_name, user_surname, user_email, roles.role_name AS user_role FROM users JOIN roles ON users.user_role = roles.role_id WHERE user_id='".$_SESSION['id']."'");
+    $query = $connection ->query("SELECT user_name, user_surname, user_phone, roles.role_name AS user_role FROM users JOIN roles ON users.user_role = roles.role_id WHERE user_id='".$_SESSION['id']."'");
     
     $data = $query->fetch(PDO::FETCH_ASSOC);
 ?>
@@ -36,11 +41,13 @@
 </head>
 <body class="backgroundreg">
     <header class="header">
-        <img src="../images/logo.png" alt="Логотип" class="logo">
+        <button class="logo-button" aria-label="Перейти на главную">
+            <span class="sr-only"></span>
+        </button>
         <div class="user-info">
             <?php   
             global $data;     
-            echo '<p>', $data['user_role'], ' ', $data['user_name'], ' ', $data['user_surname'], '  ',$data['user_email'], '</p>';
+            echo '<p>', $data['user_role'], ' ', $data['user_name'], ' ', $data['user_surname'], '  ',$data['user_phone'], '</p>';
             ?>
             <form method="POST"><button class="profile-button" aria-label="Перейти в личный кабинет" name="personPage"></button></form>
         </div>
@@ -54,13 +61,13 @@
                 <h2>Открыт</h2>
                 <?php
                     global $connection;
-                    $projects = $connection->query("SELECT project_name, prewiew, manager FROM projects WHERE stage=1");
+                    $projects = $connection->query("SELECT project_name, preview, manager FROM projects WHERE stage=1");
                     $data = $projects->fetchAll(PDO::FETCH_ASSOC);
                     foreach($data as $element)
                     {                       
                         echo '<div class="task-card">';
                         echo '<a href="/project1.html" class="task-link">';
-                        echo '<img src="/images/',$element['prewiew'], '" alt="Проект" class="task-image"></a>';
+                        echo '<img src="/images/',$element['preview'], '" alt="Проект" class="task-image"></a>';
                         echo '<div class="task-info">';
                         echo '<h3>', $element['project_name'], '</h3>';
                         echo '<p> Проект еще не начат</p>';
@@ -74,13 +81,13 @@
                 <h2>В работе</h2>
                 <?php
                     global $connection;
-                    $projects = $connection->query("SELECT project_name, prewiew, manager, startTime, endTime FROM projects WHERE stage=2");
+                    $projects = $connection->query("SELECT project_name, preview, manager, startTime, endTime FROM projects WHERE stage=2");
                     $data = $projects->fetchAll(PDO::FETCH_ASSOC);
                     foreach($data as $element)
                     {                       
                         echo '<div class="task-card">';
                         echo '<a href="/project1.html" class="task-link">';
-                        echo '<img src="/images/',$element['prewiew'], '" alt="Проект" class="task-image"></a>';
+                        echo '<img src="/images/',$element['preview'], '" alt="Проект" class="task-image"></a>';
                         echo '<div class="task-info">';
                         echo '<h3>', $element['project_name'], '</h3>';
                         echo '<p>', $element['startTime'], '</p>';
@@ -95,13 +102,13 @@
                 <h2>Закончен</h2>
                 <?php
                     global $connection;
-                    $projects = $connection->query("SELECT project_name, prewiew, manager, startTime, endTime FROM projects WHERE stage=3");
+                    $projects = $connection->query("SELECT project_name, preview, manager, startTime, endTime FROM projects WHERE stage=3");
                     $data = $projects->fetchAll(PDO::FETCH_ASSOC);
                     foreach($data as $element)
                     {                       
                         echo '<div class="task-card">';
                         echo '<a href="/project1.html" class="task-link">';
-                        echo '<img src="/images/',$element['prewiew'], '" alt="Проект" class="task-image"></a>';
+                        echo '<img src="/images/',$element['preview'], '" alt="Проект" class="task-image"></a>';
                         echo '<div class="task-info">';
                         echo '<h3>', $element['project_name'], '</h3>';
                         echo '<p>', $element['startTime'], '--', $element['endTime'], '</p>';
@@ -116,13 +123,13 @@
                 <h2>Сдан</h2>
                 <?php
                     global $connection;
-                    $projects = $connection->query("SELECT project_name, prewiew, manager, startTime, endTime FROM projects WHERE stage=4");
+                    $projects = $connection->query("SELECT project_name, preview, manager, startTime, endTime FROM projects WHERE stage=4");
                     $data = $projects->fetchAll(PDO::FETCH_ASSOC);
                     foreach($data as $element)
                     {                       
                         echo '<div class="task-card">';
                         echo '<a href="/project1.html" class="task-link">';
-                        echo '<img src="/images/',$element['prewiew'], '" alt="Проект" class="task-image"></a>';
+                        echo '<img src="/images/',$element['preview'], '" alt="Проект" class="task-image"></a>';
                         echo '<div class="task-info">';
                         echo '<h3>', $element['project_name'], '</h3>';
                         echo '<p>', $element['startTime'], '--', $element['endTime'], '</p>';
@@ -134,7 +141,7 @@
             </div>
 
         </div>
-        <button class="add-project">Добавить проект</button>
+        <form method="POST"><button class="add-project" name="createProject">Добавить проект</button></form>
     </main>
     <script>
         let lastScrollTop = 0;

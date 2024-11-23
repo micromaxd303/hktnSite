@@ -14,46 +14,62 @@ body {
 
 .header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-between; /* Распределяем элементы по сторонам */
+    align-items: center; /* Центрируем элементы вертикально */
     padding: 10px 20px;
     background-color: rgba(0, 128, 0, 0.8);
     color: white;
     position: sticky;
     top: 0;
     z-index: 1000;
+    width: 100%; /* Обеспечиваем, что хедер занимает всю ширину экрана */
+    box-sizing: border-box;
 }
 
-.logo {
-    max-height: 50px;
+.logo-button {
+    margin: 0; /* Убираем отступы */
+    padding: 0; /* Убираем дополнительные отступы */
+    background: url('../images/logo.png') no-repeat center; /* Устанавливаем логотип как фон */
+    background-size: contain; /* Убедимся, что логотип масштабируется */
+    width: 60px; /* Увеличиваем ширину кнопки */
+    height: 60px; /* Увеличиваем высоту кнопки */
+    border: none; /* Убираем границы */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 
 .user-info {
     display: flex;
     align-items: center;
     gap: 10px;
-}
-
-.user-info p {
-    margin: 0;
-    font-size: 14px;
+    flex-wrap: wrap; /* Позволяем элементам переноситься на новую строку */
     text-align: right;
 }
 
 .profile-button {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: white;
+    width: 40px;
+    height: 40px;
     border: none;
+    border-radius: 50%;
+    overflow: hidden;
     cursor: pointer;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
     transition: background-color 0.3s ease;
 }
 
-.profile-button:hover {
-    background-color: lightgray;
+.profile-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
-
 .content {
     flex: 1;
     padding: 20px;
@@ -77,14 +93,15 @@ body {
 }
 
 .column {
-    flex: 1 1 300px; /* Фиксируем ширину столбца, чтобы они оставались компактными */
+    flex: 1 1 300px; /* Минимальная ширина 300px */
+    max-width: 400px; /* Максимальная ширина */
     background-color: white;
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     height: 400px; /* Фиксированная высота */
-    overflow-y: auto; /* Вертикальная прокрутка */
-    overflow-x: hidden; /* Отключаем горизонтальную прокрутку */
+    overflow-y: auto; /* Включаем вертикальную прокрутку */
+    overflow-x: hidden; /* Убираем горизонтальную прокрутку */
 }
 
 /* Стилизация полос прокрутки */
@@ -101,25 +118,6 @@ body {
     background-color: #f0f0f0;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-    .columns {
-        flex-direction: column; /* Столбцы располагаются вертикально */
-        align-items: stretch; /* Растягиваем столбцы на всю доступную ширину */
-    }
-
-    .column {
-        flex: none; /* Убираем автоматическое изменение ширины */
-        height: 300px; /* Подстраиваем высоту для мобильных устройств */
-        overflow-y: auto; /* Сохраняем прокрутку */
-    }
-}
-
-.column h2 {
-    text-align: center;
-    color: green;
-}
-
 .task-card {
     display: flex;
     align-items: center;
@@ -128,6 +126,8 @@ body {
     border: 1px solid #ddd;
     border-radius: 8px;
     transition: box-shadow 0.3s ease;
+    height: 100px; /* Ограниченная высота для всех карточек */
+    overflow: hidden; /* Скрываем выходящий текст */
 }
 
 .task-card:hover {
@@ -151,12 +151,33 @@ body {
     margin: 0;
     font-size: 16px;
     color: black;
+    text-overflow: ellipsis; /* Обрезка текста с троеточием */
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .task-info p {
     margin: 5px 0 0;
     font-size: 14px;
     color: gray;
+    text-overflow: ellipsis; /* Обрезка текста с троеточием */
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+.column h2 {
+    text-align: center;
+    color: green;
+}
+
+.task-info p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: gray;
+    text-overflow: ellipsis; /* Обрезка текста с троеточием */
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .add-project {
@@ -178,12 +199,47 @@ body {
 /* Адаптивность */
 @media (max-width: 768px) {
     .columns {
-        flex-direction: column;
+        flex-direction: column; /* Столбцы располагаются вертикально */
         align-items: center;
+    }
+
+    .column {
+        flex: none; /* Убираем автоматическое изменение ширины */
+        min-width: 280px; /* Минимальная ширина для мобильных устройств */
+        max-width: 100%; /* Максимальная ширина занимает весь экран */
+        height: 300px; /* Уменьшаем высоту колонок для мобильных устройств */
+    }
+
+    .task-card {
+        flex-direction: column;
+        align-items: stretch;
+        height: auto; /* Высота карточек адаптируется для мобильных устройств */
     }
 
     .user-info {
         flex-direction: column;
         text-align: center;
+    }
+    .header {
+        flex-direction: row; /* Располагаем элементы в строку */
+        justify-content: space-between; /* Логотип слева, информация справа */
+        align-items: center; /* Центрируем все элементы вертикально */
+        padding: 10px; /* Сохраняем отступы */
+    }
+
+    .logo-button {
+        width: 80px; /* Делаем логотип чуть больше для мобильных */
+        height: 80px; /* Пропорционально увеличиваем высоту */
+        align-self: center; /* Центрируем кнопку внутри хедера */
+    }
+
+    .user-info {
+        flex-direction: column; /* Располагаем информацию вертикально */
+        text-align: center; /* Центрируем текст */
+        margin-top: 0; /* Убираем лишние отступы */
+    }
+
+    .user-info p {
+        font-size: 12px; /* Уменьшаем размер шрифта для компактности */
     }
 }

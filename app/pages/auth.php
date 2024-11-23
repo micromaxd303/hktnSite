@@ -16,7 +16,7 @@ $connection = new PDO('mysql:host=mysql;dbname=albiDB;charset=utf8', 'root', 'ro
 if(isset($_POST['login'])) // Авторизация
 {
     // Вытаскиваем из БД запись, у которой логин равняеться введенному
-    $query = $connection->query("SELECT user_id, user_password FROM users WHERE user_email='".$_POST['email']."' LIMIT 1");
+    $query = $connection->query("SELECT user_id, user_password FROM users WHERE user_phone='".$_POST['phone']."' LIMIT 1");
 
     $data = $query->fetch(PDO::FETCH_ASSOC);
     
@@ -51,13 +51,13 @@ else if(isset($_POST['regist'])) // Регистрация
 {
     $err = [];
     // проверям почту
-    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) 
+    if (!preg_match("/^[0-9]{11}$/", $_POST['phone'])) 
     {
-      $err[] = "Введена неправивльная почта!";
+      $err[] = "Введен неправильный номер!";
     }
 
     // проверяем, не сущестует ли пользователя с такой же почтой
-    $query = $connection->query("SELECT user_id FROM users WHERE user_email='".$_POST['email']."'");
+    $query = $connection->query("SELECT user_id FROM users WHERE user_phone='".$_POST['phone']."'");
     $tables = $query->fetch(PDO::FETCH_COLUMN);
     
     if($tables)
@@ -72,7 +72,7 @@ else if(isset($_POST['regist'])) // Регистрация
         // Убераем лишние пробелы и делаем двойное хеширование
         $password = md5(md5(trim($_POST['password'])));
 
-        $connection->query("INSERT INTO users SET user_role=7, user_name='".$_POST['name']."', user_surname='".$_POST['surname']."', user_email='".$_POST['email']."', user_password='".$password."'");
+        $connection->query("INSERT INTO users SET user_role=7, user_name='".$_POST['name']."', user_surname='".$_POST['surname']."', user_phone='".$_POST['phone']."', user_password='".$password."'");
     }
     else
     {
@@ -114,8 +114,8 @@ else if(isset($_POST['regist'])) // Регистрация
           <div class="form-content">
             <form method="post">
               <div class="form-group">
-                <label for="username">Почта</label>
-                <input type="text" id="email" name="email" required="required"/>
+                <label for="username">Номер телефона</label>
+                <input type="text" id="phone" name="phone" required="required"/>
               </div>
               <div class="form-group">
                 <label for="password">Пароль</label>
@@ -137,19 +137,19 @@ else if(isset($_POST['regist'])) // Регистрация
           <form method="post">
             <div class="form-group">
               <label for="username">Имя</label>
-              <input type="text" id="username" name="name"/>
+              <input type="text" id="username" name="name" required="required"/>
             </div>
             <div class="form-group">
               <label for="surname">Фамилия</label>
-              <input type="text" id="surname" name="surname"/>
+              <input type="text" id="surname" name="surname" required="required"/>
             </div>
             <div class="form-group">
-              <label for="email">Почта</label>
-              <input type="email" id="email" name="email"/>
+              <label for="phone">Номер телефона</label>
+              <input type="phone" id="phone" name="phone" required="required"/>
             </div>
             <div class="form-group">
               <label for="password">Пароль</label>
-              <input type="password" id="password" name="password"/>
+              <input type="password" id="password" name="password" required="required"/>
             </div>
             <div class="form-group">
               <button type="submit" name="regist">Зарегистрироваться</button>

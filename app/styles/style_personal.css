@@ -8,20 +8,26 @@ body {
     background-position: center;
     min-height: 100vh;
     color: #333;
+    width: 100%; /* Устанавливаем ширину body */
+    overflow-x: hidden; /* Убираем горизонтальную прокрутку */
 }
 
 /* Header Styles */
 .header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-between; /* Элементы равномерно распределяются */
+    align-items: center; /* Центрируем элементы по вертикали */
     padding: 10px 20px;
-    background-color: rgba(0, 128, 0, 0.8);
-    color: white;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    background-color: rgba(0, 128, 0, 0.8); /* Цвет фона */
+    color: white; /* Цвет текста */
+    position: sticky; /* Хедер остается на месте при скроллинге */
+    top: 0; /* Расположение сверху */
+    z-index: 1000; /* Устанавливаем высокий приоритет по слоям */
+    width: 100%; /* Хедер заполняет всю ширину экрана */
+    box-sizing: border-box; /* Учитываем отступы в ширине */
+    height: auto; /* Высота адаптируется к содержимому */
 }
+
 
 
 .logo-button {
@@ -48,14 +54,33 @@ body {
 
 .user-info {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: row; /* Располагаем элементы в строку */
+    align-items: center; /* Центрируем элементы по вертикали */
+    justify-content: flex-end; /* Элементы выравниваются вправо */
+    gap: 10px; /* Добавляем промежуток между элементами */
+    text-align: right; /* Текст внутри остается выровненным вправо */
+    width: auto; /* Используем автоматическую ширину */
 }
 
 .user-info p {
     margin: 0;
     font-size: 14px;
-    text-align: right;
+    text-align: right; /* Текст выравнивается вправо */
+}
+
+.profile-button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: background-color 0.3s ease;
 }
 
 .name-phone {
@@ -75,17 +100,29 @@ body {
 }
 
 .profile-button {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: white;
+    width: 40px;
+    height: 40px;
     border: none;
+    border-radius: 50%;
+    overflow: hidden;
     cursor: pointer;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
     transition: background-color 0.3s ease;
 }
 
 .profile-button:hover {
-    background-color: lightgray;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.profile-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 /* Profile Page Styles */
@@ -106,6 +143,7 @@ body {
     box-sizing: border-box;
     overflow: hidden;
 }
+
 
 .profile-content {
     display: flex;
@@ -212,14 +250,34 @@ button {
 
 @media (max-width: 768px) {
     .header {
-        height: auto;
-        padding: 10px 20px;
-        flex-wrap: wrap;
+        width: 100%; /* Хедер растягивается на всю ширину экрана */
+        flex-wrap: nowrap; /* Предотвращаем перенос элементов */
+    }
+
+    .logo-button {
+        width: 60px; /* Размер логотипа */
+        height: 60px;
     }
 
     .user-info {
-        flex-direction: column;
-        text-align: center;
+        flex-direction: row; /* Элементы остаются в строку */
+        align-items: center; /* Центрируем элементы */
+        justify-content: flex-end; /* Выравниваем группу вправо */
+        gap: 5px; /* Уменьшаем промежуток на маленьких экранах */
+    }
+
+    .user-info p {
+        font-size: 12px; /* Уменьшаем текст на мобильных */
+    }
+
+    .profile-button {
+        width: 35px; /* Уменьшаем размер кнопки на мобильных */
+        height: 35px;
+    }
+
+    .name-phone {
+        flex-direction: column; /* Вертикальная структура для текста */
+        align-items: center;
     }
 
     .name-phone {
@@ -235,29 +293,57 @@ button {
         margin-top: 10px;
     }
 
-    .main-container {
-
+.main-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Центрируем элементы по горизонтали */
+        justify-content: center; /* Центрируем элементы по вертикали */
+        text-align: center; /* Центрируем текст */
     }
 
     .profile-container {
-
+        width: 100%; /* Контейнер занимает всю ширину экрана */
+        max-width: 600px; /* Ограничиваем максимальную ширину для мобильных */
+        margin: 20px auto; /* Центрируем контейнер */
+        padding: 20px; /* Увеличиваем внутренние отступы */
+        box-sizing: border-box; /* Учитываем padding в ширине */
+        text-align: center; /* Центрируем текст */
     }
 
     .profile-content {
-        flex-direction: column;
-        align-items: center;
+        display: flex;
+        flex-direction: column; /* Располагаем элементы в колонку */
+        align-items: center; /* Центрируем элементы */
+        text-align: center; /* Центрируем текст внутри */
+        gap: 15px; /* Добавляем отступы между элементами */
+    }
+
+    .profile-left, .profile-right {
+        width: 100%; /* Элементы растягиваются на всю ширину */
+        max-width: 300px; /* Ограничиваем максимальную ширину */
+        margin: 0 auto; /* Центрируем элементы */
+        text-align: center; /* Центрируем текст */
     }
 
     .info-block {
-        flex-direction: column;
-        text-align: center;
+        display: flex;
+        flex-direction: column; /* Располагаем текст в колонку */
+        align-items: center; /* Центрируем текст */
+        text-align: center; /* Центрируем текст */
+        margin: 10px 0; /* Добавляем отступы сверху и снизу */
+        gap: 10px; /* Отступы между элементами */
     }
 
     .info-block div {
-
+        width: 100%; /* Блоки растягиваются на всю ширину */
+        text-align: center; /* Центрируем текст */
     }
 
     .buttons {
-        justify-content: center;
+        display: flex;
+        flex-direction: column; /* Располагаем кнопки в колонку */
+        align-items: center; /* Центрируем кнопки */
+        gap: 10px; /* Отступы между кнопками */
+        margin-top: 20px; /* Отступ сверху */
     }
 }

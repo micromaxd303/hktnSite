@@ -18,7 +18,7 @@
 
     $connection = new PDO('mysql:host=mysql;dbname=albiDB;charset=utf8', 'root', 'root');
 
-    $query = $connection ->query("SELECT user_name, user_surname, user_profilePic, user_rating, user_email, roles.role_name AS user_role, roles.payment AS user_payment FROM users JOIN roles ON user_role = roles.role_id WHERE user_id='".$_SESSION['id']."'");
+    $query = $connection ->query("SELECT user_name, user_surname, user_profilePic, user_rating, user_phone, roles.role_name AS user_role, roles.payment AS user_payment FROM users JOIN roles ON user_role = roles.role_id WHERE user_id='".$_SESSION['id']."'");
     
     global $data;
 
@@ -89,7 +89,7 @@
 
                     <div class="info-block">
                         <div>
-                            <label>Репутация:</label>
+                            <label>Рейтинг:</label>
                             <?php
                                 echo '<p>', $data['user_rating'], '</p>';
                             ?>

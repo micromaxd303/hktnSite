@@ -21,9 +21,9 @@ if (isset($_COOKIE['id']) and isset($_COOKIE['hash']))
     else
     {
         session_start();
-        $_SESSION['username'] = $userdata['user_email'];
-        $_SESSION['id']   = $userdata['user_id'];
-        $_SESSION['time']     = time();
+        $_SESSION['username'] = $userdata['user_name'];
+        $_SESSION['id'] = $userdata['user_id'];
+        $_SESSION['time'] = time();
 
         header("Location: main.php");
     }
