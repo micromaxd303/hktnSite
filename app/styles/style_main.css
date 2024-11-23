@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Play', sans-serif;
+    background-image: url(../images/city.jpg);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #333;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(0, 128, 0, 0.8);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    max-height: 50px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-info p {
+    margin: 0;
+    font-size: 14px;
+    text-align: right;
+}
+
+.profile-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-button:hover {
+    background-color: lightgray;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: 20px auto;
+    border-radius: 10px;
+    max-width: 1200px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: green;
+}
+
+.columns {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.column {
+    flex: 1 1 300px; /* Фиксируем ширину столбца, чтобы они оставались компактными */
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 400px; /* Фиксированная высота */
+    overflow-y: auto; /* Вертикальная прокрутка */
+    overflow-x: hidden; /* Отключаем горизонтальную прокрутку */
+}
+
+/* Стилизация полос прокрутки */
+.column::-webkit-scrollbar {
+    width: 8px;
+}
+
+.column::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+.column::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .columns {
+        flex-direction: column; /* Столбцы располагаются вертикально */
+        align-items: stretch; /* Растягиваем столбцы на всю доступную ширину */
+    }
+
+    .column {
+        flex: none; /* Убираем автоматическое изменение ширины */
+        height: 300px; /* Подстраиваем высоту для мобильных устройств */
+        overflow-y: auto; /* Сохраняем прокрутку */
+    }
+}
+
+.column h2 {
+    text-align: center;
+    color: green;
+}
+
+.task-card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+}
+
+.task-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.task-link {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.task-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.task-info h3 {
+    margin: 0;
+    font-size: 16px;
+    color: black;
+}
+
+.task-info p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: gray;
+}
+
+.add-project {
+    display: block;
+    margin: 20px auto;
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-project:hover {
+    background-color: darkgreen;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .columns {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .user-info {
+        flex-direction: column;
+        text-align: center;
+    }
+}
