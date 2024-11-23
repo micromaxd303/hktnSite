@@ -25,8 +25,8 @@ if (isset($_COOKIE['id']) and isset($_COOKIE['hash']))
         $_SESSION['id']   = $userdata['user_id'];
         $_SESSION['time']     = time();
 
-        echo "Привет, ".$userdata['user_email'].". Всё работает!";
-        //header("Location: main.php");
+        //echo "Привет, ".$userdata['user_email'].". Всё работает!";
+        header("Location: main.php");
     }
 }
 else

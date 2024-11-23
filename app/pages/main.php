@@ -1,10 +1,17 @@
 <?php
 
 	session_start();
+
     if(!isset($_SESSION['username'])) {
     header("Location: auth.php");
-}
 
+
+   
+}
+    $connection = new PDO('mysql:host=mysql;dbname=albiDB;charset=utf8', 'root', 'root');
+
+    $query = $connection ->query("SELECT user_name, user_surname, user_email, roles.role_name AS user_role FROM users JOIN roles ON users.user_role = roles.role_id WHERE user_id='".$_SESSION['id']."'");
+    $data = $query->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -27,8 +34,10 @@
     <header class="header">
         <img src="../images/logo.png" alt="Логотип" class="logo">
         <div class="user-info">
-            <p>Имя Фамилия</p>
-            <p>+709932523</p>
+            <?php   
+            global $data;     
+            echo '<p>', $data['user_role'], ' ', $data['user_name'], ' ', $data['user_surname'], '  ',$data['user_email'], '</p>';
+            ?>
             <button class="profile-button" aria-label="Перейти в личный кабинет"></button>
         </div>
     </header>

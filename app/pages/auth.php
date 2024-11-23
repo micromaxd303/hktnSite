@@ -72,7 +72,7 @@ else if(isset($_POST['regist'])) // Регистрация
         // Убераем лишние пробелы и делаем двойное хеширование
         $password = md5(md5(trim($_POST['password'])));
 
-        $connection->query("INSERT INTO users SET user_name='".$_POST['name']."', user_surname='".$_POST['surname']."', user_email='".$_POST['email']."', user_password='".$password."'");
+        $connection->query("INSERT INTO users SET user_role=7, user_name='".$_POST['name']."', user_surname='".$_POST['surname']."', user_email='".$_POST['email']."', user_password='".$password."'");
     }
     else
     {
@@ -152,7 +152,7 @@ else if(isset($_POST['regist'])) // Регистрация
               <input type="password" id="password" name="password"/>
             </div>
             <div class="form-group">
-              <button type="submit" name="regist">Register</button>
+              <button type="submit" name="regist">Зарегистрироваться</button>
             </div>
           </form>
 
