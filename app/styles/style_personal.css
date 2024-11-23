@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
 
+
 body {
     margin: 0;
     font-family: 'Play', sans-serif;
@@ -184,11 +185,17 @@ button {
     cursor: pointer;
     font-size: 14px;
 }
-
-.upload-photo {
-    background: #4caf50;
-    color: #fff;
+.uploadButton {
     padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.uploadButton:hover {
+    background-color: #45a049;
 }
 
 .delete-photo {

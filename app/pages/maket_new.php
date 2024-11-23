@@ -40,11 +40,13 @@
 
     $connection = new PDO('mysql:host=mysql;dbname=albiDB;charset=utf8', 'root', 'root');
 
-    $query = $connection ->query("SELECT user_name, user_surname, user_profilePic, user_rating, user_phone, roles.role_name AS user_role, roles.payment AS user_payment FROM users JOIN roles ON user_role = roles.role_id WHERE user_id='".$_SESSION['id']."'");
+    $query = $connection ->query("SELECT user_name, user_surname, user_profilePic, user_rating, user_phone, roles.role_name AS user_role_name, roles.payment AS user_payment FROM users JOIN roles ON users.user_role = roles.role_id WHERE user_id='".$_SESSION['id']."'");
     
     global $data;
-
     $data = $query->fetch(PDO::FETCH_ASSOC);
+
+    $query = $connection->query("SELECT images.pic_name AS pic_name FROM users JOIN images ON user_profilePic=images.id WHERE user_id='".$_SESSION['id']."'");
+    $profilePic = $query->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -72,11 +74,13 @@
             <div class="user-info">
                 <?php   
                 global $data;     
-                echo '<p>', $data['user_role'], ' ', $data['user_name'], ' ', $data['user_surname'], '  ',$data['user_phone'], '</p>';
+                echo '<p>', $data['user_role_name'], '    ', $data['user_name'], ' ', $data['user_surname'], '</p>';
                 ?>
                 <form method="POST">
                     <button class="profile-button" aria-label="Перейти в личный кабинет" name="personPage">
-                        <img src="../images/profile1.jpg" alt="Аватар" class="profile-avatar">
+                        <?php
+                            echo "<img src='../images/", $profilePic['pic_name'] , "' alt='Фото профиля' class='profile-avatar'>";                         
+                        ?>
                     </button>
                 </form>
             </div>

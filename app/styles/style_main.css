@@ -145,6 +145,7 @@ body {
     height: 80px;
     object-fit: cover;
     border-radius: 8px;
+    padding: 5px;
 }
 
 .task-info h3 {
