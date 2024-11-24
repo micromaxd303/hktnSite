@@ -14,7 +14,7 @@
 
     if (isset($_POST['createProject']))
     {
-        $connection->query("INSERT INTO projects (project_name, preview, stage) VALUES('".$_POST['layout-name']."', 1, 1)");
+        $connection->query("INSERT INTO projects (project_name, preview, stage, estimated_date) VALUES('".$_POST['layout-name']."', 1, 1, '".$_POST['estDate']."')");
         $id = $connection->query("SELECT id FROM projects ORDER BY id DESC LIMIT 1")->fetch(PDO::FETCH_ASSOC);
 
         for($i = 0; $i < 5; $i++)
@@ -109,7 +109,7 @@
                     <div id="planned-date-container" class="info-block">
                         <label for="planned-date">Планируемая дата сдачи:</label>
                         <button type="button" id="date-button">Выбрать дату</button>
-                        <input type="date" id="date-picker" style="display: none;">
+                        <input type="date" id="date-picker" name="estDate" style="display: none;" required>
                     </div>                                    
                     <button type="submit" class="edit-button" name="createProject">Сохранить</button>
                     <button type="reset" class="delete-photo">Очистить</button>

@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\type;
-
 	session_start();
 
     if(!isset($_SESSION['username'])) {
@@ -53,11 +51,13 @@ use function PHPSTORM_META\type;
             <?php      
             echo '<p>', $data['user_role_name'], '    ', $data['user_name'], ' ', $data['user_surname'], '</p>';
             ?>
-            <form method="POST"><button class="profile-button" aria-label="Перейти в личный кабинет" name="personPage">
+            <form method="POST">
+                <button class="profile-button" aria-label="Перейти в личный кабинет" name="personPage">
                         <?php
                             echo "<img src='../images/", $profilePic['pic_name'] , "' alt='Фото профиля' class='profile-avatar'>";                         
                         ?>
-            </button></form>
+                </button>
+            </form>
         </div>
     </header>
     <main class="content">
@@ -72,13 +72,18 @@ use function PHPSTORM_META\type;
                     $projectData = $projects->fetchAll(PDO::FETCH_ASSOC);
                     foreach(array_reverse($projectData) as $element)
                     {                       
-                        $projectPic = $connection->query("SELECT images.pic_name AS project_pic FROM projects JOIN images ON preview=images.id WHERE projects.id='".$element['id']."'")->fetch(PDO::FETCH_ASSOC);
+                        $projectPic = $connection->query("SELECT images.pic_name AS project_pic FROM projects JOIN images ON preview=images.id WHERE projects.id='".$element['id']."'")->fetch(PDO::FETCH_ASSOC);    
+
+                        echo '<form method="GET" action="/pages/maket.php" style="margin: 0; padding: 0;">';
+                        echo '<input type="hidden" name="id" value="'.$element['id'].'">';
+                        echo '<button type="submit" style="all: unset; display: block; width: 100%; height: 100%;">';
                         echo '<div class="task-card">';
-                        echo '<img src="../images/', $projectPic['project_pic'], '" alt="Проект" class="task-image">';        
+                        echo '<img src="../images/', $projectPic['project_pic'], '" alt="Проект" class="task-image">';    
                         echo '<div class="task-info">';
                         echo '<h3>', $element['project_name'], '</h3>';
                         echo '<p> Проект еще не начат</p>';
-                        echo '</div></div>';
+                        echo '</div></div></button></form>';
+
                     }
                 ?>
             </div>
@@ -92,13 +97,16 @@ use function PHPSTORM_META\type;
                     foreach(array_reverse($projectData) as $element)
                     {                       
                         $projectPic = $connection->query("SELECT images.pic_name AS project_pic FROM projects JOIN images ON preview=images.id WHERE projects.id='".$element['id']."'")->fetch(PDO::FETCH_ASSOC);
+                        echo '<form method="GET" action="/pages/maket.php" style="margin: 0; padding: 0;">';
+                        echo '<input type="hidden" name="id" value="'.$element['id'].'">';
+                        echo '<button type="submit" style="all: unset; display: block; width: 100%; height: 100%;">';
                         echo '<div class="task-card">';
-                        echo '<img src="../images/', $projectPic['project_pic'], '" alt="Проект" class="task-image">';
+                        echo '<img src="../images/', $projectPic['project_pic'], '" alt="Проект" class="task-image">';    
                         echo '<div class="task-info">';
                         echo '<h3>', $element['project_name'], '</h3>';
                         echo '<p>', $element['startTime'], '</p>';
 
-                        echo '</div></div>';
+                        echo '</div></div></button></form>';
                     }
                 ?>
             </div>
@@ -112,13 +120,16 @@ use function PHPSTORM_META\type;
                     foreach(array_reverse($projectData) as $element)
                     {                
                         $projectPic = $connection->query("SELECT images.pic_name AS project_pic FROM projects JOIN images ON preview=images.id WHERE projects.id='".$element['id']."'")->fetch(PDO::FETCH_ASSOC);       
+                        echo '<form method="GET" action="/pages/maket.php" style="margin: 0; padding: 0;">';
+                        echo '<input type="hidden" name="id" value="'.$element['id'].'">';
+                        echo '<button type="submit" style="all: unset; display: block; width: 100%; height: 100%;">';
                         echo '<div class="task-card">';
-                        echo '<img src="../images/', $projectPic['project_pic'], '" alt="Проект" class="task-image">';
+                        echo '<img src="../images/', $projectPic['project_pic'], '" alt="Проект" class="task-image">';    
                         echo '<div class="task-info">';
                         echo '<h3>', $element['project_name'], '</h3>';
                         echo '<p>', $element['startTime'], '--', $element['endTime'], '</p>';
 
-                        echo '</div></div>';
+                        echo '</div></div></button></form>';
                     }
                 ?>
             </div>
@@ -132,14 +143,17 @@ use function PHPSTORM_META\type;
                     foreach(array_reverse($projectData) as $element)
                     {    
                         $projectPic = $connection->query("SELECT images.pic_name AS project_pic FROM projects JOIN images ON preview=images.id WHERE projects.id='".$element['id']."'")->fetch(PDO::FETCH_ASSOC);                   
+                        echo '<form method="GET" action="/pages/maket.php" style="margin: 0; padding: 0;">';
+                        echo '<input type="hidden" name="id" value="'.$element['id'].'">';
+                        echo '<button type="submit" style="all: unset; display: block; width: 100%; height: 100%;">';
                         echo '<div class="task-card">';
-                        echo '<img src="../images/', $projectPic['project_pic'], '" alt="Проект" class="task-image">';
+                        echo '<img src="../images/', $projectPic['project_pic'], '" alt="Проект" class="task-image">';    
                         echo '<div class="task-info">';
                         echo '<h3>', $element['project_name'], '</h3>';
                         echo '<p>', $element['startTime'], '--', $element['endTime'], '</p>';
                         echo '<p>Оценка: </p>';
 
-                        echo '</div></div>';
+                        echo '</div></div></button></form>';
                     }
                 ?>
             </div>

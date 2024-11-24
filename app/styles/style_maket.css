@@ -1,0 +1,665 @@
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Play', sans-serif;
+    background-image: url(../images/city.jpg);
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    color: #222; /* Более темный текст для контраста */
+    line-height: 1.6; /* Улучшенная читаемость */
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.main-container {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.project-links-box {
+    flex: 1; /* Растягивается на всю доступную ширину */
+    background: #f9f9f9; /* Светлый фон */
+    border-radius: 10px; /* Скругленные углы */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    padding: 20px; /* Внутренние отступы */
+    height: 280px; /* Фиксированная высота бокса */
+    overflow-y: auto; /* Вертикальный скролл для лишнего содержимого */
+    box-sizing: border-box; /* Учитываем отступы в размеры */
+}
+
+/* Контейнер с картинкой и ссылками */
+.project-overview {
+    display: flex;
+    gap: 20px; /* Расстояние между картинкой и ссылками */
+    margin-bottom: 30px;
+    align-items: flex-start;
+}
+
+.project-title-box {
+    background: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон */
+    border-radius: 10px; /* Скругленные углы */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    padding: 10px 20px; /* Внутренние отступы */
+    display: inline-block; /* Ширина зависит от содержимого */
+    margin-bottom: 20px; /* Отступ снизу */
+}
+
+.project-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333; /* Тёмный цвет текста */
+    margin: 0;
+    text-align: center;
+}
+
+.project-image {
+    flex: 0 0 40%; /* Занимает 40% от ширины контейнера */
+    max-width: 500px;
+}
+
+/* Стиль для картинки */
+.project-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Бокс для ссылок */
+в
+.project-links-box::-webkit-scrollbar {
+    width: 8px; /* Ширина полосы прокрутки */
+}
+.project-links-box::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Цвет полосы прокрутки */
+    border-radius: 5px; /* Скругление полосы */
+}
+.project-overview {
+    display: flex;
+    align-items: flex-start; /* Выравнивание элементов сверху */
+    gap: 20px; /* Расстояние между картинкой и ссылками */
+}
+
+/* Стили для ссылок */
+.project-links {
+    list-style: none; /* Убираем маркеры */
+    padding: 0;
+    margin: 0;
+}
+
+.project-links li {
+    margin-bottom: 10px;
+}
+
+.project-links li:last-child {
+    margin-bottom: 0; /* Убираем отступ у последнего элемента */
+}
+
+.project-links a {
+    color: #007bff; /* Синий цвет ссылок */
+    text-decoration: none; /* Убираем подчеркивание */
+    font-size: 16px;
+}
+
+.project-links a:hover {
+    text-decoration: underline; /* Подчеркивание при наведении */
+    color: #0056b3; /* Более темный синий */
+}
+
+button {
+    border-radius: 8px; /* Скругленные углы */
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Плавный переход */
+}
+
+button:hover {
+    transform: scale(1.05); /* Легкое увеличение при наведении */
+    background-color: rgba(76, 175, 80, 0.9); /* Изменение цвета */
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #4caf50, #2e7d32); /* Градиент для улучшения внешнего вида */
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px; /* Увеличенный шрифт */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Добавлена тень */
+    transition: top 0.3s;
+}
+.logo-button {
+    width: 100px;
+    height: 50px;
+    background: url('../images/logo.png') no-repeat center center;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    text-align: right;
+}
+
+.user-info p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.profile-button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: background-color 0.3s ease;
+}
+
+.profile-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Этапы: два столбца */
+.stages-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.stage {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    overflow: hidden;
+}
+
+.stage h3 {
+    color: #3c763d; /* Новый цвет для заголовков */
+    letter-spacing: 0.5px; /* Пространство между буквами */
+}
+
+.tasks-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.task {
+    background: #f9f9f9; /* Светлый фон */
+    
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для карточек */
+    border-radius: 8px; /* Скругленные углы */
+    margin-bottom: 20px; /* Добавляем отступ между задачами */
+}
+
+.task-text {
+    margin-left: 20px; /* Отступ от зеленой полоски */
+    margin-top: 20px; /* Добавляем небольшой отступ сверху */
+    font-weight: bold; /* Можно выделить текст для лучшей читаемости (по желанию) */
+}
+
+
+.start-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+}
+
+.start-btn:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.end-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+}
+
+.end-btn:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+}
+
+.add-worker-btn {
+    background: #e6f4e6;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.add-worker-btn:hover {
+    background: #d0ebd0;
+    transform: scale(1.05);
+}
+
+.evaluate-btn {
+    background: #2196f3;
+    color: white;
+    border: none;
+}
+
+.evaluate-btn:hover {
+    background: #1976d2;
+    transform: scale(1.05);
+}
+
+.progress-btn {
+    background: #2196f3;
+    color: white;
+    border: none;
+}
+
+.progress-btn:hover {
+    background: #1976d2;
+    transform: scale(1.05);
+}
+
+.task-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.task-info {
+    margin-left: 30px; /* Отступ текста правее от зеленой полоски */
+}
+
+.task-info p {
+    margin: 5px 0; /* Меньшие отступы сверху и снизу */
+    line-height: 1.4; /* Читаемость строк */
+    font-size: 14px; /* Настраиваем размер текста */
+}
+.task .worker-info {
+    margin-right: 20px; /* Добавляем отступ слева (или справа в зависимости от выравнивания) */
+    margin-left: 5px;
+}
+
+.progress {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    width: 100px;
+    height: 10px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 5px;
+}
+/* Равномерное расположение кнопок в центре */
+.task-buttons {
+    display: flex;
+    justify-content: center; /* Центрируем кнопки по горизонтали */
+    align-items: center; /* Выравниваем кнопки по вертикали */
+    gap: 10px; /* Расстояние между кнопками */
+    margin-top: 15px; /* Отступ сверху */
+    margin-bottom: 10px; /* Добавляем небольшой отступ снизу */
+}
+
+
+.task-buttons button {
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.task-buttons .finish-btn {
+    display: none;
+}
+
+/* Менеджер */
+.manager-section {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-top: 30px;
+}
+
+.manager-section h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #333;
+}
+
+.manager {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.manager-info p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.managers-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: flex-start;
+}
+
+.managers-container .worker {
+    width: calc(20% - 12px); /* Такая же ширина, как у работников */
+    background: #f9f9f9;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+/* Работники */
+.workers-section {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-top: 30px;
+}
+
+.workers-section h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #333;
+}
+
+.workers-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: flex-start;
+}
+
+.worker {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: calc(20% - 12px); /* Ширина карточки */
+    background: #f9f9f9; /* Светлый фон */
+    border-radius: 5px; /* Скругленные углы */
+    padding: 10px; /* Внутренний отступ */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Плавные эффекты */
+    box-sizing: border-box;
+}
+.worker:hover {
+    background: #dcdcdc; /* Более серый цвет при наведении */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Увеличенная тень */
+    transform: scale(1.02); /* Небольшое увеличение карточки */
+    cursor: pointer; /* Указатель на курсоре */
+}
+.worker-details {
+    text-align: left; /* Выравниваем текст по левому краю */
+    line-height: 1.4; /* Улучшаем читаемость текста */
+}
+.worker-info {
+    display: flex;
+    align-items: center; /* Выравниваем по вертикали */
+    justify-content: flex-start; /* Оставляем выравнивание элементов влево */
+    gap: 15px; /* Пространство между текстом и аватаркой */
+}
+
+.worker-info .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Делаем аватарку круглой */
+    overflow: hidden;
+    flex-shrink: 0; /* Аватарка не уменьшается при сжатии */
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Добавляем тень для аватарки */
+}
+
+.worker-info img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.worker-info p {
+    font-weight: 600; /* Полужирный текст */
+    color: #555; /* Слабый цвет */
+}
+
+.worker:hover, .manager:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); /* Тень при наведении */
+}
+
+.worker, .manager {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px; /* Отступ между аватаркой и текстом */
+}
+
+.worker-info p, .manager-info p {
+    margin: 0; /* Убедитесь, что отступы текста корректны */
+    line-height: 1.5; /* Улучшение читаемости текста */
+}
+.add-button {
+    width: calc(20% - 12px); /* Для работников, чтобы соответствовать их размерам */
+    background: #e6f4e6;
+    border: 2px dashed #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.add-button:hover {
+    background: #d0ebd0;
+    border-color: #a0a0a0;
+}
+
+.add-button .plus-icon {
+    font-size: 30px;
+    color: #666;
+    font-weight: bold;
+    user-select: none;
+}
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s, opacity 0.3s;
+    pointer-events: none; /* Отключает клики по скрытому окну */
+}
+
+.popup.hidden {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none; /* Элементы не кликабельны */
+    transition: visibility 0.3s, opacity 0.3s;
+}
+
+.popup.visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: all; /* Элементы становятся кликабельными */
+}
+
+.popup-content {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    z-index: 1001;
+    pointer-events: auto; /* Сохраняет кликабельность внутри окна */
+}
+
+.popup-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.worker-button {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.worker-button:hover {
+    background: #0056b3;
+}
+
+.close-popup {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background: #dc3545;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.close-popup:hover {
+    background: #a71d2a;
+}
+
+#evaluate-popup .popup-content {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    z-index: 1001;
+    pointer-events: auto;
+}
+
+#evaluation-input {
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#submit-evaluation {
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    background: #4caf50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submit-evaluation:hover {
+    background: #45a049;
+}
+
+#close-evaluate-popup {
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    background: #dc3545;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#close-evaluate-popup:hover {
+    background: #a71d2a;
+}
+
+@media (max-width: 768px) {
+    .stages-container {
+        grid-template-columns: 1fr;
+    }
+
+    .worker-info {
+        font-size: 14px; /* Увеличение шрифта для читаемости */
+    }
+
+    .worker {
+        width: 100%; /* Заполнение ширины экрана */
+        flex-direction: row; /* Отображение в строку */
+        gap: 15px;
+    }
+
+    .managers-container .worker {
+        flex-direction: row;
+        width: 100%; /* Заполнение экрана */
+    }
+    .avatar {
+        width: 60px; /* Увеличение размера для лучшего отображения */
+        height: 60px;
+    }
+    .worker-info .avatar,
+    .manager-info .avatar {
+        width: 50px; /* Соответствие размеру выше */
+        height: 50px;
+    }
+}
