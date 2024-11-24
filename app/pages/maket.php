@@ -275,7 +275,7 @@
                                 else if($userData['user_id'] == $_SESSION['id'] && !$element['completed'])
                                 {
                                     echo '<form method="post"><input type="hidden" name="id" value="'.$element['id'].'"><input type="hidden" name="progress" value="'.$element['progress'].'"><button class="end-btn" name="endTask">Закончить</button></form>';
-                                    echo '<button class="progress-btn">Записать прогресс</button>';
+                                    echo '<input type="hidden" id="hidenProgressInput" name="id" value="'.$element['id'].'"><button class="progress-btn">Записать прогресс</button>';
                                 }
                                 if($element['progress'] >= 100 && $projectData['manager'] == $_SESSION['id'] && $element['rating'] == 0 && $element['completed']) 
                                 {
@@ -342,7 +342,7 @@
                                 else if($userData['user_id'] == $_SESSION['id'] && !$element['completed'])
                                 {
                                     echo '<form method="post"><input type="hidden" name="id" value="'.$element['id'].'"><input type="hidden" name="progress" value="'.$element['progress'].'"><button class="end-btn" name="endTask">Закончить</button></form>';
-                                    echo '<button class="progress-btn">Записать прогресс</button>';
+                                    echo '<input type="hidden" id="hidenProgressInput" name="id" value="'.$element['id'].'"><button class="progress-btn">Записать прогресс</button>';
                                 }
                                 if($element['progress'] >= 100 && $projectData['manager'] == $_SESSION['id'] && $element['rating'] == 0 && $element['completed'])
                                 {
@@ -409,7 +409,7 @@
                                 else if($userData['user_id'] == $_SESSION['id'] && !$element['completed'])
                                 {
                                     echo '<form method="post"><input type="hidden" name="id" value="'.$element['id'].'"><input type="hidden" name="progress" value="'.$element['progress'].'"><button class="end-btn" name="endTask">Закончить</button></form>';
-                                    echo '<button class="progress-btn">Записать прогресс</button>';
+                                    echo '<input type="hidden" id="hidenProgressInput" name="id" value="'.$element['id'].'"><button class="progress-btn">Записать прогресс</button>';
                                 }
                                 if($element['progress'] >= 100 && $projectData['manager'] == $_SESSION['id'] && $element['rating'] == 0 && $element['completed'])
                                 {
@@ -476,7 +476,7 @@
                                 else if($userData['user_id'] == $_SESSION['id'] && !$element['completed'])
                                 {
                                     echo '<form method="post"><input type="hidden" name="id" value="'.$element['id'].'"><input type="hidden" name="progress" value="'.$element['progress'].'"><button class="end-btn" name="endTask">Закончить</button></form>';
-                                    echo '<button class="progress-btn">Записать прогресс</button>';
+                                    echo '<input type="hidden" id="hidenProgressInput" name="id" value="'.$element['id'].'"><button class="progress-btn">Записать прогресс</button>';
                                 }
                                 if($element['progress'] >= 100 && $projectData['manager'] == $_SESSION['id'] && $element['rating'] == 0 && $element['completed'])
                                 {

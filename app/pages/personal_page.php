@@ -118,7 +118,7 @@
                         <div>
                             <label>Номер телефона:</label>
                             <?php
-                                echo '<p>', '+7927-935-89-77', '</p>';
+                                echo '<p>', $data['user_phone'], '</p>';
                             ?>
                         </div>
                         <div>
