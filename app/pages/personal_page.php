@@ -89,14 +89,13 @@
                     </div>
 
                         <form id="uploadForm" method="post" enctype="multipart/form-data" name="uploadedFile" style="display: none;">
-                            <!-- Поле для выбора файла (скрыто) -->
                             <input type="file" id="fileInput" name="uploadedFile" accept="image/png, image/jpeg" required>
                         </form>
                         
                         <!-- Кнопка для выбора и загрузки -->
                         <button id="uploadButton" class="uploadButton">Загрузить фото</button>
 
-                    <form method="POST"><button class="delete-photo" name="exit">Выйти</button></form>
+                    <button class="delete-photo" name="exit">Выйти</button>
                 </div>
 
                 <div class="profile-right">

@@ -14,7 +14,32 @@
 
     if (isset($_POST['createProject']))
     {
-        $connection->query("INSERT INTO projects (project_name, preview, stage, estimated_date) VALUES('".$_POST['layout-name']."', 1, 1, '".$_POST['estDate']."')");
+        if (isset($_FILES['uploadedFile']))
+        {
+            $fileTmpPath = $_FILES['uploadedFile']['tmp_name'];
+    
+            if(getimagesize($fileTmpPath) !== false)
+            {   
+                $id = $connection->query("SELECT id FROM images ORDER BY id DESC LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+    
+                $fileName = "project" . $id['id'] + 1 . ".jpg";
+              
+                $uploadDir = '../images/';
+                $destination = $uploadDir . basename($fileName);
+        
+                if (!move_uploaded_file($fileTmpPath, $destination)) 
+                {
+                    echo "Ошибка при сохранении изображения.";
+                }
+                else
+                {
+                    $connection->query("INSERT INTO images (pic_name) VALUES('".$fileName."')");                
+                }
+    
+            }
+        }
+
+        $connection->query("INSERT INTO projects (project_name, preview, stage, estimated_date) VALUES('".$_POST['layout-name']."', '".$id['id']."'+1, 1, '".$_POST['estDate']."')");
         $id = $connection->query("SELECT id FROM projects ORDER BY id DESC LIMIT 1")->fetch(PDO::FETCH_ASSOC);
 
         for($i = 0; $i < 5; $i++)
@@ -89,15 +114,14 @@
 
         <div class="profile-container">
             <h1>Создать новый макет</h1>
-            <form id="layout-form" action="#" method="post">
+            <form id="layout-form" action="#" method="post" enctype="multipart/form-data" name="uploadedFile">
                 <div class="info-block">
                     <label for="layout-name">Название макета:</label>
                     <input type="text" id="layout-name" name="layout-name" placeholder="Введите название" required>
                 </div>
                 <div class="info-block image-block">
                     <img src="../images/placeholder.png" alt="Плейсхолдер изображения" id="placeholder-image">
-                    <button type="button" id="add-photo-button">Добавить фото</button>
-                    <input type="file" id="upload-image" accept="image/*" style="display: none;">
+                    <input type="file" id="fileInput" name="uploadedFile" accept="image/png, image/jpeg">
                 </div>
 
 
@@ -200,7 +224,23 @@
             lastScrollTop = scrollTop;
         });
     </script>
+    <script>
+        const uploadButton = document.getElementById('uploadButton');
+        const fileInput = document.getElementById('fileInput');
+        const uploadForm = document.getElementById('uploadForm');
 
+        uploadButton.addEventListener('click', () => {
+            // Открыть окно выбора файла
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', () => {
+            // Автоматически отправить форму после выбора файла
+            if (fileInput.files.length > 0) {
+                uploadForm.submit();
+            }
+        });
+    </script>
 
 </body>
 </html>
